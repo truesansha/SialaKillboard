@@ -262,3 +262,7 @@ __pycache__/
 /Siala.WebUI/wwwroot/web.config
 /Siala.WebUI/wwwroot/index.html
 /Siala.WebUI/wwwroot/index.html
+*.map
+/Siala.WebUI/wwwroot
+/Siala.WebUI/wwwroot
+/Siala.WebUI/Scripts/app/**/*.js

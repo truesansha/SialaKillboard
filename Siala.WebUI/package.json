@@ -7,35 +7,48 @@
     "@angular/common": "4.2.5",
     "@angular/compiler": "4.2.5",
     "@angular/core": "4.2.5",
+    "@angular/forms": "4.2.5",
     "@angular/http": "4.2.5",
     "@angular/platform-browser": "4.2.5",
     "@angular/platform-browser-dynamic": "4.2.5",
+    "@angular/router": "4.2.5",
     "@angular/upgrade": "4.2.5",
-    "@angular/forms": "4.2.5",
-    "@angular/router": "4.2.5"
+    "core-js": "2.4.1",
+    "ie-shim": "0.1.0",
+    "rxjs": "5.4.2",
+    "zone.js": "0.8.12"
   },
 
   "devDependencies": {
-    "typescript": "2.4.1",
-    "webpack": "3.0.0",
+    "@types/node": "7.0.22",
+    "angular2-template-loader": "0.6.2",
+    "angular-router-loader": "0.6.0",
+    "awesome-typescript-loader": "3.2.1",
     "clean-webpack-plugin": "0.1.16",
     "copy-webpack-plugin": "4.0.1",
-    "less-loader": "4.0.4",
-    "html-webpack-plugin": "2.29.0",
-    "raw-loader": "0.5.1",
-    "style-loader": "0.18.2",
     "css-loader": "0.28.4",
-    "file-loader": "0.11.2" 
+    "file-loader": "0.11.2",
+    "html-webpack-plugin": "2.29.0",
+    "less": "2.7.2",
+    "less-loader": "4.0.4",
+    "raw-loader": "0.5.1",
+    "source-map-loader": "0.2.1",
+    "style-loader": "0.18.2",
+    "tslint": "5.5.0",
+    "tslint-loader": "3.2.1",
+    "typescript": "2.4.1",
+    "webpack": "3.0.0",
+    "ts-helpers": "^1.1.2"
   },
 
   "scripts": {
-    "webpack-dev": "set NODE_ENV=development && webpack",
-    "webpack-production": "set NODE_ENV=production && webpack",
     "build-dev": "npm run webpack-dev",
     "build-production": "npm run ngc && npm run webpack-production",
+    "publish-for-iis": "npm run build-production && dotnet publish -c Release",
     "watch-webpack-dev": "set NODE_ENV=development && webpack --watch --color",
     "watch-webpack-production": "npm run build-production --watch --color",
-    "publish-for-iis": "npm run build-production && dotnet publish -c Release"
+    "webpack-dev": "set NODE_ENV=development && webpack",
+    "webpack-production": "set NODE_ENV=production && webpack"
   },
 
   "-vs-binding": { "ProjectOpened": [ "webpack-dev" ] }

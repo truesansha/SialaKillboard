@@ -15,6 +15,8 @@ module.exports = {
         hints: false
     },
     entry: {
+        'polyfills': './Scripts/polyfills.ts',
+        'vendor': './Scripts/vendor.ts',
         'app': './Scripts/main.ts'
     },
 
@@ -75,7 +77,7 @@ module.exports = {
         exprContextCritical: false
     },
     plugins: [
-        //new webpack.optimize.CommonsChunkPlugin({ name: ['vendor', 'polyfills'] }),
+        new webpack.optimize.CommonsChunkPlugin({ name: ['vendor', 'polyfills'] }),
 
         new CleanWebpackPlugin(
             [
