@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "name": "siala",
+  "private": true,
+
+  "dependencies": {
+    "@angular/common": "4.2.5",
+    "@angular/compiler": "4.2.5",
+    "@angular/core": "4.2.5",
+    "@angular/http": "4.2.5",
+    "@angular/platform-browser": "4.2.5",
+    "@angular/platform-browser-dynamic": "4.2.5",
+    "@angular/upgrade": "4.2.5",
+    "@angular/forms": "4.2.5",
+    "@angular/router": "4.2.5"
+  },
+
+  "devDependencies": {
+    "typescript": "2.4.1",
+    "webpack": "3.0.0",
+    "clean-webpack-plugin": "0.1.16",
+    "copy-webpack-plugin": "4.0.1",
+    "less-loader": "4.0.4",
+    "html-webpack-plugin": "2.29.0",
+    "raw-loader": "0.5.1",
+    "style-loader": "0.18.2",
+    "css-loader": "0.28.4",
+    "file-loader": "0.11.2" 
+  },
+
+  "scripts": {
+    "webpack-dev": "set NODE_ENV=development && webpack",
+    "webpack-production": "set NODE_ENV=production && webpack",
+    "build-dev": "npm run webpack-dev",
+    "build-production": "npm run ngc && npm run webpack-production",
+    "watch-webpack-dev": "set NODE_ENV=development && webpack --watch --color",
+    "watch-webpack-production": "npm run build-production --watch --color",
+    "publish-for-iis": "npm run build-production && dotnet publish -c Release"
+  },
+
+  "-vs-binding": { "ProjectOpened": [ "webpack-dev" ] }
+}
