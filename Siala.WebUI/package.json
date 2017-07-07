@@ -25,6 +25,7 @@
     "angular-router-loader": "0.6.0",
     "awesome-typescript-loader": "3.2.1",
     "clean-webpack-plugin": "0.1.16",
+    "concurrently" : "3.5.0",
     "copy-webpack-plugin": "4.0.1",
     "css-loader": "0.28.4",
     "file-loader": "0.11.2",
@@ -38,10 +39,12 @@
     "tslint-loader": "3.2.1",
     "typescript": "2.4.1",
     "webpack": "3.0.0",
+    "webpack-dev-server": "2.5.1",
     "ts-helpers": "^1.1.2"
   },
 
   "scripts": {
+    "start": "concurrently \"webpack-dev-server --hot --inline --port 44444\" \"dotnet run\" ",
     "build-dev": "npm run webpack-dev",
     "build-production": "npm run ngc && npm run webpack-production",
     "publish-for-iis": "npm run build-production && dotnet publish -c Release",
