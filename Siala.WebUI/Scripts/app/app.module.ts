@@ -9,13 +9,13 @@ import 'rxjs/Rx';
 import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/errors/page-not-found.component';
-//import { ItemListComponent } from './item-list.component';
+import { SummaryComponent } from './components/summary/summary.component';
 //import { ItemDetailEditComponent } from './item-detail-edit.component';
 //import { ItemDetailViewComponent } from './item-detail-view.component';
 //import { LoginComponent } from './login.component';
 //import { PageNotFoundComponent } from './page-not-found.component';
 import { AppRouting } from './routing/app.routing';
-//import { ItemService } from './item.service';
+import { SummaryService } from './services/summary.service';
 //import { AuthService } from './auth.service';
 //import { AuthHttp } from './auth.http';
 
@@ -23,7 +23,7 @@ import { AppRouting } from './routing/app.routing';
     // directives, components, and pipes
     declarations: [
         AppComponent,
-        //ItemListComponent,
+        SummaryComponent,
         //ItemDetailEditComponent,
         //ItemDetailViewComponent,
         //AboutComponent,
@@ -42,7 +42,7 @@ import { AppRouting } from './routing/app.routing';
     ],
     // providers
     providers: [
-        //ItemService,
+        SummaryService
         //AuthService,
         //AuthHttp
     ],

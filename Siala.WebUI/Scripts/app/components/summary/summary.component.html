@@ -1,0 +1,104 @@
+﻿<div class="col-md-4">
+    <div *ngIf="item">
+        <div class="item-container">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table table-striped table-hover ">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Kills</th>
+                                <th>Deaths</th>
+                                <th>Class</th>
+                                <th>Kills</th>
+                                <th>Deaths</th>
+                                <th>Class</th>
+                                <th>Kills</th>
+                                <th>Deaths</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  class="info">
+                                <td>Arcane Archer</td>
+                                <td>{{item.arcaneArcherKills}}</td>
+                                <td>{{item.arcaneArcherKills}}</td>
+                                <td>Druid</td>
+                                <td>{{item.druidKills}}</td>
+                                <td>{{item.druidDeaths}}</td>
+                                <td>Red Dragon Disciple</td>
+                                <td>{{item.rddKills}}</td>
+                                <td>{{item.rddDeaths}}</td>
+                            </tr>
+                            <tr  class="danger">
+                                <td>Assassin</td>
+                                <td>{{item.assassinKills}}</td>
+                                <td>{{item.assassinDeaths}}</td>
+                                <td>Dwarven Defender</td>
+                                <td>{{item.ddKills}}</td>
+                                <td>{{item.ddDeaths}}</td>
+                                <td>Rogue</td>
+                                <td>{{item.rogueKills}}</td>
+                                <td>{{item.rogueDeaths}}</td>
+                            </tr>
+                            <tr  class="info">
+                                <td>Barbarian</td>
+                                <td>{{item.barbarianKills}}</td>
+                                <td>{{item.barbarianDeaths}}</td>
+                                <td>Fighter</td>
+                                <td>{{item.figherKills}}</td>
+                                <td>{{item.fighterDeaths}}</td>
+                                <td>Shadowdancer</td>
+                                <td>{{item.shadowdancerKills}}</td>
+                                <td>{{item.shadowdancerDeaths}}</td>
+                            </tr>
+                            <tr  class="danger">
+                                <td>Bard</td>
+                                <td>{{item.bardKills}}</td>
+                                <td>{{item.bardDeaths}}</td>
+                                <td>Monk</td>
+                                <td>{{item.monkKills}}</td>
+                                <td>{{item.monkDeaths}}</td>
+                                <td>Shifter</td>
+                                <td>{{item.shifterKills}}</td>
+                                <td>{{item.shifterDeaths}}</td>
+                            </tr>
+                            <tr  class="info">
+                                <td>Blackguard</td>
+                                <td>{{item.blackguardKills}}</td>
+                                <td>{{item.blackguardDeaths}}</td>
+                                <td>Paldin</td>
+                                <td>{{item.paladinKills}}</td>
+                                <td>{{item.paladinDeaths}}</td>
+                                <td>Sorcerer</td>
+                                <td>{{item.sorcererKills}}</td>
+                                <td>{{item.sorcererDeaths}}</td>
+                            </tr>
+                            <tr  class="danger">
+                                <td>Champion Of Torm</td>
+                                <td>{{item.cotKills}}</td>
+                                <td>{{item.cotDeaths}}</td>
+                                <td>Pale Master</td>
+                                <td>{{item.pmKills}}</td>
+                                <td>{{item.pmDeaths}}</td>
+                                <td>Weapon Master</td>
+                                <td>{{item.wmKills}}</td>
+                                <td>{{item.wmDeaths}}</td>
+                            </tr>
+                            <tr  class="info">
+                                <td>Cleric</td>
+                                <td>{{item.clericKills}}</td>
+                                <td>{{item.clericDeaths}}</td>
+                                <td>Ranger</td>
+                                <td>{{item.rangerKills}}</td>
+                                <td>{{item.rangerDeaths}}</td>
+                                <td>Wizard</td>
+                                <td>{{item.wizardKills}}</td>
+                                <td>{{item.wizardDeaths}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

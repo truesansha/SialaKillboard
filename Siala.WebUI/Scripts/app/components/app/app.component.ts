@@ -9,12 +9,11 @@ import './app.component.less';
 })
 
 export class AppComponent {
-    title = "SIALA KB";
+    title = 'SIALA KB';
 
     constructor(public router: Router) { }
 
     isActive(data: any[]): boolean {
         return this.router.isActive(this.router.createUrlTree(data), true);
     }
-
 }
