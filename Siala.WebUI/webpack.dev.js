@@ -81,6 +81,7 @@ module.exports = {
 
         new CleanWebpackPlugin(
             [
+                './wwwroot',
                 './wwwroot/js'
             ]
         ),
@@ -89,11 +90,11 @@ module.exports = {
             filename: 'index.html',
             inject: 'body',
             template: 'Scripts/app/index.html'
-        })
+        }),
 
-        //new CopyWebpackPlugin([
-        //    { from: './angularApp/images/*.*', to: 'assets/', flatten: true }
-        //])
+        new CopyWebpackPlugin([
+            { from: './web.config', to: './', flatten: true }
+        ])
     ]
 
 };

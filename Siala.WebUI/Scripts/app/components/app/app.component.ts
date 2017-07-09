@@ -2,7 +2,6 @@
 import { Router } from '@angular/router';
 
 import './app.component.less';
-import '../../less/style.less';
 
 @Component({
     selector: 'siala-killboard',
@@ -10,5 +9,12 @@ import '../../less/style.less';
 })
 
 export class AppComponent {
-    title = "SIALA";
+    title = "SIALA KB";
+
+    constructor(public router: Router) { }
+
+    isActive(data: any[]): boolean {
+        return this.router.isActive(this.router.createUrlTree(data), true);
+    }
+
 }
