@@ -37,6 +37,12 @@ module.exports = {
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000
+        },
+        proxy: {
+            "/api": {
+                "target": "http://localhost:40989",
+                "secure": false
+            }
         }
     },
 
@@ -81,7 +87,6 @@ module.exports = {
 
         new CleanWebpackPlugin(
             [
-                './wwwroot',
                 './wwwroot/js'
             ]
         ),
@@ -90,11 +95,11 @@ module.exports = {
             filename: 'index.html',
             inject: 'body',
             template: 'Scripts/app/index.html'
-        }),
+        })
 
-        new CopyWebpackPlugin([
-            { from: './web.config', to: './', flatten: true }
-        ])
+        //new CopyWebpackPlugin([
+        //    { from: './web.config', to: './', flatten: true }
+        //])
     ]
 
 };
