@@ -1,0 +1,28 @@
+﻿<div class="item-container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th>Время</th>
+                        <th>Жертва</th>
+                        <th>Класс</th>
+                        <th>Убийца</th>
+                        <th>Место</th>
+                        <th>Фракция</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of items" [ngClass]="(item.victimFactionId=='0')?'info':'danger'">
+                    <td>{{item.killTime | date:"dd.MM.yyyy hh:mm:ss"}}</td>
+                    <td>{{item.victimName}}</td>
+                    <td>{{item.victimClass}}</td>
+                    <td>{{item.killerName}}</td>
+                    <td>{{item.locationName}}</td>
+                    <td>{{item.victimFaction}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

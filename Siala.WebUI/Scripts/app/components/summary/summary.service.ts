@@ -11,7 +11,7 @@ export class SummaryService {
     private baseUrl = 'api/summary/'; // web api URL
     // calls the [GET] /api/summary/GetSummary Web API method to retrieve k/d summary information.
     getSummary() {
-        var url = this.baseUrl + 'GetSummary';
+        var url = this.baseUrl;
         return this.http.get(url)
             .map(response => <SummaryItem>response.json());
     }

@@ -12,8 +12,11 @@ import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/errors/page-not-found.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { KillListComponent } from './components/killList/kill-list.component';
 
 import { SummaryService } from './components/summary/summary.service';
+import { KillListService } from './components/killList/kill-list.service';
+
 import { AppRouting } from './routing/app.routing';
 import { AppErrorHandler } from './app.errorhandler';
 import { ErrorService } from './services/error.service';
@@ -23,6 +26,7 @@ import { ErrorService } from './services/error.service';
     declarations: [
         AppComponent,
         SummaryComponent,
+        KillListComponent,
         HomeComponent,
         PageNotFoundComponent
     ],
@@ -40,6 +44,7 @@ import { ErrorService } from './services/error.service';
     // providers
     providers: [
         SummaryService,
+        KillListService,
         { provide: ErrorHandler, useClass: AppErrorHandler },
         ErrorService,
         SnotifyService
