@@ -2,7 +2,7 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { SummaryItem } from '../models/SummaryItem';
+import { SummaryItem } from './SummaryItem';
 
 @Injectable()
 export class SummaryService {
@@ -13,13 +13,12 @@ export class SummaryService {
     getSummary() {
         var url = this.baseUrl + 'GetSummary';
         return this.http.get(url)
-            .map(response => <SummaryItem>response.json())
-            .catch(this.handleError);
+            .map(response => <SummaryItem>response.json());
     }
 
     private handleError(error: Response) {
         // output errors to the console.
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        console.error('LOCAL ERROR');
+        return Observable.throw(error);
     }
 }

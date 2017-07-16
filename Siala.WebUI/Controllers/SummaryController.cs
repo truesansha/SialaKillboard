@@ -15,6 +15,7 @@ namespace Siala.WebUI.Controllers
         [HttpGet("GetSummary")]
         public JsonResult GetSummary()
         {
+            throw new NullReferenceException();
             return new JsonResult(new SummaryItem
             {
                 arcaneArcherKills = new Random(Guid.NewGuid().GetHashCode()).Next(0, 200),

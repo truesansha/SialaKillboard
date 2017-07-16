@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\web.config" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Middleware\" />
+    <Folder Include="Scripts\app\models\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.0" />

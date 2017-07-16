@@ -1,8 +1,8 @@
 ﻿import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SummaryItem } from '../../models/SummaryItem';
-import { SummaryService } from '../../services/summary.service';
+import { SummaryItem } from './SummaryItem';
+import { SummaryService } from './summary.service';
 
 import './summary.component.less';
 
