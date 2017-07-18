@@ -8,7 +8,7 @@ using Siala.Domain;
 namespace Siala.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170717225229_Initial")]
+    [Migration("20170718185037_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,6 +228,8 @@ namespace Siala.Domain.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("DamageTaken");
+
+                    b.Property<int>("FinalBlowPlayerId");
 
                     b.Property<DateTime>("KillTime");
 

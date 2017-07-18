@@ -106,6 +106,7 @@ namespace Siala.Domain.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DamageTaken = table.Column<int>(nullable: false),
+                    FinalBlowPlayerId = table.Column<int>(nullable: false),
                     KillTime = table.Column<DateTime>(nullable: false),
                     LocationId = table.Column<int>(nullable: false),
                     VictimClass1Id = table.Column<int>(nullable: false),

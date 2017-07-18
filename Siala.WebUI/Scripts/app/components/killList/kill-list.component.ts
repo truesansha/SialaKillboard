@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { KillListItem } from './KillListItem';
@@ -11,13 +11,42 @@ import './kill-list.component.less';
     templateUrl: 'kill-list.component.html'
 })
 
-export class KillListComponent {
+export class KillListComponent implements OnInit {
     items: KillListItem[];
+    prevPageNum: number;
+    nextPageNum: number;
     constructor(private killListService: KillListService,
         private router: Router) {
+        this.prevPageNum = 1;
+        this.nextPageNum = 2;
     }
 
     ngOnInit() {
-        this.killListService.get().subscribe(items => this.items = items);
+        this.killListService.getList(1).subscribe(items => this.items = items);
+    }
+
+    prevPage(page: number) {
+        this.prevPageNum -= 1;
+        if (this.prevPageNum < 1) {
+            this.prevPageNum = 1;
+        }
+        this.nextPageNum -= 1;
+        if (this.nextPageNum < 2) {
+            this.nextPageNum = 2;
+        }
+
+        this.killListService.getList(page).subscribe(items => this.items = items);
+    }
+
+    nextPage(page: number) {
+        this.prevPageNum += 1;
+        if (this.prevPageNum > 9) {
+            this.prevPageNum = 9;
+        }
+        this.nextPageNum += 1;
+        if (this.nextPageNum > 10) {
+            this.nextPageNum = 10;
+        }
+        this.killListService.getList(page).subscribe(items => this.items = items);
     }
 }

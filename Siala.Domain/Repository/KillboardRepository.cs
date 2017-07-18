@@ -5,6 +5,17 @@ namespace Siala.Domain.Repository
 {
     public class KillboardRepository : IKillboardRepository
     {
-        public IEnumerable<Kill> Kills => new List<Kill>();
+        private readonly ApplicationDbContext _dbContext;
+
+        public KillboardRepository(ApplicationDbContext context)
+        {
+            _dbContext = context;
+        }
+
+        public IEnumerable<Kill> Kills => _dbContext.Kills;
+        public IEnumerable<Player> Players => _dbContext.Players;
+        public IEnumerable<PlayerClass> PlayerClasses => _dbContext.PlayerClasses;
+        public IEnumerable<Faction> Factions => _dbContext.Factions;
+        public IEnumerable<Location> Locations => _dbContext.Locations;
     }
 }

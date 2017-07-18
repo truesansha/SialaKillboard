@@ -228,6 +228,8 @@ namespace Siala.Domain.Migrations
 
                     b.Property<int>("DamageTaken");
 
+                    b.Property<int>("FinalBlowPlayerId");
+
                     b.Property<DateTime>("KillTime");
 
                     b.Property<int>("LocationId");

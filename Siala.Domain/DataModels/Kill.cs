@@ -31,6 +31,8 @@ namespace Siala.Domain.DataModels
         public Int32 LocationId { get; set; }
         [Required]
         public Int32 DamageTaken { get; set; }
+        [Required]
+        public Int32 FinalBlowPlayerId { get; set; }
 
         #endregion Properties
 

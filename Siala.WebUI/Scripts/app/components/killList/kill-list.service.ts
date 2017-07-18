@@ -10,8 +10,12 @@ export class KillListService {
 
     private baseUrl = 'api/kills/'; // web api URL
     // calls the [GET] /api/kills/Get Web API method to retrieve kill list
-    get() {
-        var url = this.baseUrl;
+    getList(page: number) {
+        var url = this.baseUrl + 'list/';
+        if (page == null) {
+            page = 1;
+        }
+        url += page;
         return this.http.get(url)
             .map(response => <KillListItem[]>response.json());
     }

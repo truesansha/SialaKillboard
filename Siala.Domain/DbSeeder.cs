@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -37,6 +38,19 @@ namespace Siala.Domain
             {
                 await CreatePlayerClassesAsync();
             }
+
+#if DEBUG
+            // Create temp players
+            if (!await _dbContext.Players.AnyAsync())
+            {
+                await GenerateTempPlayers();
+            }
+
+            if (!await _dbContext.Kills.AnyAsync())
+            {
+                await GenerateTempKills();
+            }
+#endif
 
             _dbContext.SaveChanges();
         }
@@ -243,6 +257,381 @@ namespace Siala.Domain
             };
 
             await _dbContext.PlayerClasses.AddRangeAsync(races);
+        }
+
+        private async Task GenerateTempPlayers()
+        {
+            List<String> dwarfNames = new List<String>
+            {
+                "Боин",
+                "Дели",
+                "Фифур",
+                "Норин",
+                "Терин",
+                "Бобур",
+                "Фофур",
+                "Дали",
+                "Неин",
+                "Рофур",
+                "Рабур",
+                "Бомфур",
+                "Дели",
+                "Теин",
+                "Бофур",
+                "Дафур"
+            };
+
+            List<String> elfNames = new List<String>
+            {
+                "Эарранад",
+                "Эаррилир",
+                "Эаррохад",
+                "Эйарод",
+                "Эйкилеф",
+                "Эланан",
+                "Элвэ",
+                "Элгинор",
+                "Элгорм",
+                "Элгорм",
+                "Элрафир",
+                "Элрин",
+                "Эльанил",
+                "Эльвэ",
+                "Эльгорм",
+                "Эльлинан",
+                "Эльлор",
+                "Моран",
+                "Моранен",
+                "Морвенинг",
+                "Морда",
+                "Мордаинг",
+                "Мордисилас",
+                "Мордриэнь",
+                "Мориен",
+                "Мориинг",
+                "Морлот",
+                "Морринилас"
+            };
+
+            List<String> gnomeNames = new List<String>
+            {
+                "Какиника",
+                "Баивсена",
+                "Шиорлика",
+                "Доидин",
+                "Заадка",
+                "Миэтсена",
+                "Киидса",
+                "Лависа",
+                "Кивиин",
+                "Довиса"
+            };
+
+            List<String> halfelfNames = new List<String>
+            {
+                "Наиселл",
+                "Натаниэль",
+                "Нокс",
+                "Нур",
+                "Ниа"
+            };
+
+            List<String> halforcNames = new List<String>
+            {
+                "Изанк",
+                "Ралг",
+                "Гогдиш",
+                "Гакар",
+                "Фалаг",
+                "Морт",
+                "Сугак",
+                "Нузаг",
+                "Нигак",
+                "Прарк",
+                "Хагниш",
+                "Агизаг",
+                "Дузык"
+            };
+
+            List<String> halflingNames = new List<String>
+            {
+                "Титаний",
+                "Тоберон",
+                "Тиберий",
+                "Тор",
+                "Тейлор",
+                "Ферммар",
+                "Фаавел",
+                "Феофил",
+                "Фиделий",
+                "Феб"
+            };
+
+            List<String> humanNames = new List<String>
+            {
+                "Медор",
+                "Освир",
+                "Хавирлеб",
+                "Метелитар",
+                "Араодкар",
+                "Бароил",
+                "Осрорн",
+                "Исвиртур",
+                "Эарагбар",
+                "Исротур",
+                "Элдор",
+                "Эарор",
+                "Босил",
+                "Киаглас",
+                "Эаррон",
+                "Хавиртур"
+            };
+
+            List<Player> players = new List<Player>();
+
+            players.AddRange(getDwarfs(dwarfNames));
+            players.AddRange(getElfs(elfNames));
+            players.AddRange(getGnomes(gnomeNames));
+            players.AddRange(getHalfElfes(halfelfNames));
+            players.AddRange(getHalfOrcs(halforcNames));
+            players.AddRange(getHalflings(halflingNames));
+            players.AddRange(getHumans(humanNames));
+
+            await _dbContext.Players.AddRangeAsync(players);
+        }
+
+        private async Task GenerateTempKills()
+        {
+            List<Player> playersValiostr = await _dbContext.Players.Where(p => p.FactionId == 1).ToListAsync();
+            Int32 vCount = playersValiostr.Count;
+            List<Player> playersInsanna = await _dbContext.Players.Where(p => p.FactionId == 2).ToListAsync();
+            Int32 iCount = playersInsanna.Count;
+            List<Player> players = await _dbContext.Players.ToListAsync();
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+            foreach (Player player in players)
+            {
+                Int32 killNumber = rnd.Next(1, 25);
+                for (Int32 i = 0; i < killNumber; i++)
+                {
+                    Player fbPlayer = player.FactionId == 1 ? playersInsanna[rnd.Next(0, iCount)] : playersValiostr[rnd.Next(0, vCount)];
+                    EntityEntry<Kill> kill = _dbContext.Kills.Add(new Kill
+                    {
+                        FinalBlowPlayerId = fbPlayer.Id,
+                        KillTime = new DateTime(2017, rnd.Next(1, 7), rnd.Next(1, 29)),
+                        LocationId = rnd.Next(1, 4),
+                        VictimClass1Id = player.Class1Id,
+                        VictimClass1Level = player.Class1Level,
+                        VictimFactionId = player.FactionId,
+                        VictimId = player.Id,
+                        VictimRaceId = player.RaceId,
+                        DamageTaken = 0
+                    });
+
+                    _dbContext.SaveChanges();
+
+                    Int32 involvedCount = rnd.Next(0, 5);
+
+                    _dbContext.InvolvedPlayers.Add(new InvolvedPlayer
+                    {
+                        AttackerClass1Id = fbPlayer.Class1Id,
+                        AttackerClass1Level = 40,
+                        AttackerFactionId = fbPlayer.FactionId,
+                        AttackerRaceId = fbPlayer.RaceId,
+                        AttackerId = fbPlayer.Id,
+                        DamageDone = rnd.Next(100, 1000),
+                        KillId = kill.Entity.Id
+                    });
+
+                    List<Int32> involvedIds = new List<Int32>();
+                    involvedIds.Add(fbPlayer.Id);
+                    for (Int32 j = 0; j < involvedCount; j++)
+                    {
+                        Player randomAttacker = player.FactionId == 1 ? playersInsanna[rnd.Next(0, iCount)] : playersValiostr[rnd.Next(0, vCount)];
+                        if (!involvedIds.Contains(randomAttacker.Id))
+                        {
+                            _dbContext.InvolvedPlayers.Add(new InvolvedPlayer
+                            {
+                                AttackerClass1Id = randomAttacker.Class1Id,
+                                AttackerClass1Level = 40,
+                                AttackerFactionId = randomAttacker.FactionId,
+                                AttackerRaceId = randomAttacker.RaceId,
+                                AttackerId = randomAttacker.Id,
+                                DamageDone = rnd.Next(1, 200),
+                                KillId = kill.Entity.Id
+                            });
+                        }
+                    }
+                }
+                
+            }
+        }
+
+        private List<Player> getDwarfs(List<String> names)
+        {
+            List<Player> result = new List<Player>();
+
+            foreach (String name in names)
+            {
+                Random rnd = new Random(Guid.NewGuid().GetHashCode());
+
+                Int32 classId = rnd.Next(1, 23);
+                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+
+                result.Add(new Player
+                {
+                    Class1Id = classId,
+                    Class1Level = 40,
+                    FactionId = factionId,
+                    Name = name,
+                    RaceId = 7
+                });
+            }
+
+            return result;
+        }
+
+        private List<Player> getElfs(List<String> names)
+        {
+            List<Player> result = new List<Player>();
+
+            foreach (String name in names)
+            {
+                Random rnd = new Random(Guid.NewGuid().GetHashCode());
+
+                Int32 classId = rnd.Next(1, 23);
+                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+
+                result.Add(new Player
+                {
+                    Class1Id = classId,
+                    Class1Level = 40,
+                    FactionId = factionId,
+                    Name = name,
+                    RaceId = 6
+                });
+            }
+
+            return result;
+        }
+
+        private List<Player> getGnomes(List<String> names)
+        {
+            List<Player> result = new List<Player>();
+
+            foreach (String name in names)
+            {
+                Random rnd = new Random(Guid.NewGuid().GetHashCode());
+
+                Int32 classId = rnd.Next(1, 23);
+                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+
+                result.Add(new Player
+                {
+                    Class1Id = classId,
+                    Class1Level = 40,
+                    FactionId = factionId,
+                    Name = name,
+                    RaceId = 5
+                });
+            }
+
+            return result;
+        }
+
+        private List<Player> getHalfElfes(List<String> names)
+        {
+            List<Player> result = new List<Player>();
+
+            foreach (String name in names)
+            {
+                Random rnd = new Random(Guid.NewGuid().GetHashCode());
+
+                Int32 classId = rnd.Next(1, 23);
+                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+
+                result.Add(new Player
+                {
+                    Class1Id = classId,
+                    Class1Level = 40,
+                    FactionId = factionId,
+                    Name = name,
+                    RaceId = 4
+                });
+            }
+
+            return result;
+        }
+
+        private List<Player> getHalfOrcs(List<String> names)
+        {
+            List<Player> result = new List<Player>();
+
+            foreach (String name in names)
+            {
+                Random rnd = new Random(Guid.NewGuid().GetHashCode());
+
+                Int32 classId = rnd.Next(1, 23);
+                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+
+                result.Add(new Player
+                {
+                    Class1Id = classId,
+                    Class1Level = 40,
+                    FactionId = factionId,
+                    Name = name,
+                    RaceId = 3
+                });
+            }
+
+            return result;
+        }
+
+        private List<Player> getHalflings(List<String> names)
+        {
+            List<Player> result = new List<Player>();
+
+            foreach (String name in names)
+            {
+                Random rnd = new Random(Guid.NewGuid().GetHashCode());
+
+                Int32 classId = rnd.Next(1, 23);
+                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+
+                result.Add(new Player
+                {
+                    Class1Id = classId,
+                    Class1Level = 40,
+                    FactionId = factionId,
+                    Name = name,
+                    RaceId = 2
+                });
+            }
+
+            return result;
+        }
+
+        private List<Player> getHumans(List<String> names)
+        {
+            List<Player> result = new List<Player>();
+
+            foreach (String name in names)
+            {
+                Random rnd = new Random(Guid.NewGuid().GetHashCode());
+
+                Int32 classId = rnd.Next(1, 23);
+                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+
+                result.Add(new Player
+                {
+                    Class1Id = classId,
+                    Class1Level = 40,
+                    FactionId = factionId,
+                    Name = name,
+                    RaceId = 1
+                });
+            }
+
+            return result;
         }
     }
 }

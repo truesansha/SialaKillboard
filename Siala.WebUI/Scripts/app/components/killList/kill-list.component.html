@@ -1,20 +1,22 @@
 ﻿<div class="item-container">
     <div class="panel panel-default">
         <div class="panel-body">
+            <div (click)="prevPage(prevPageNum)" class="btn btn-primary btn-xs">&lt;----Туда</div>
+            <div (click)="nextPage(nextPageNum)" class="btn btn-primary btn-xs">Сюда----&gt;</div>
             <table class="table table-striped table-hover ">
                 <thead>
-                    <tr>
-                        <th>Время</th>
-                        <th>Жертва</th>
-                        <th>Класс</th>
-                        <th>Убийца</th>
-                        <th>Место</th>
-                        <th>Фракция</th>
-                    </tr>
+                <tr>
+                    <th>Время</th>
+                    <th>Жертва</th>
+                    <th>Класс</th>
+                    <th>Убийца</th>
+                    <th>Место</th>
+                    <th>Фракция</th>
+                </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let item of items" [ngClass]="(item.victimFactionId=='0')?'info':'danger'">
-                    <td>{{item.killTime | date:"dd.MM.yyyy hh:mm:ss"}}</td>
+                <tr *ngFor="let item of items" [ngClass]="(item.victimFactionId=='1')?'info':'danger'">
+                    <td>{{item.killTime | date:"dd.MM.yyyy HH:mm:ss"}}</td>
                     <td>{{item.victimName}}</td>
                     <td>{{item.victimClass}}</td>
                     <td>{{item.killerName}}</td>

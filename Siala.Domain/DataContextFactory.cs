@@ -1,9 +1,5 @@
-﻿using System;
-using System.Data.Linq;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.Extensions.Configuration;
 
 namespace Siala.Domain
 {
