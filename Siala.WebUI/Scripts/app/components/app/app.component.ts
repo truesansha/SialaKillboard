@@ -11,7 +11,6 @@ import './app.component.less';
 })
 
 export class AppComponent implements OnInit {
-    title = 'SIALA KB';
 
     constructor(public router: Router, private errorService: ErrorService, private snotifyService: SnotifyService) {
         this.errorService.errorRaised$.subscribe(errorText => {

@@ -9,13 +9,22 @@ import 'rxjs/Rx';
 import { SnotifyModule, SnotifyService } from 'ng-snotify';
 
 import { AppComponent } from './components/app/app.component';
-import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/errors/page-not-found.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { KillListComponent } from './components/killList/kill-list.component';
+import { KillComponent } from './components/kill/kill.component';
+import { PlayerComponent } from './components/player/player.component';
+import { PlayerClassComponent } from './components/playerClass/player-class.component';
+import { LocationComponent } from './components/location/location.component';
+import { FactionComponent } from './components/faction/faction.component';
 
 import { SummaryService } from './components/summary/summary.service';
 import { KillListService } from './components/killList/kill-list.service';
+import { KillService } from './components/kill/kill.service';
+import { PlayerService } from './components/player/player.service';
+import { PlayerClassService } from './components/playerClass/player-class.service';
+import { LocationService } from './components/location/location.service';
+import { FactionService } from './components/faction/faction.service';
 
 import { AppRouting } from './routing/app.routing';
 import { AppErrorHandler } from './app.errorhandler';
@@ -27,7 +36,11 @@ import { ErrorService } from './services/error.service';
         AppComponent,
         SummaryComponent,
         KillListComponent,
-        HomeComponent,
+        KillComponent,
+        PlayerComponent,
+        PlayerClassComponent,
+        LocationComponent,
+        FactionComponent,
         PageNotFoundComponent
     ],
     // modules
@@ -45,6 +58,11 @@ import { ErrorService } from './services/error.service';
     providers: [
         SummaryService,
         KillListService,
+        KillService,
+        PlayerService,
+        PlayerClassService,
+        LocationService,
+        FactionService,
         { provide: ErrorHandler, useClass: AppErrorHandler },
         ErrorService,
         SnotifyService

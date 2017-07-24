@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { KillListItem } from './KillListItem';
 import { KillListService } from './kill-list.service';
@@ -15,38 +15,28 @@ export class KillListComponent implements OnInit {
     items: KillListItem[];
     prevPageNum: number;
     nextPageNum: number;
-    constructor(private killListService: KillListService,
-        private router: Router) {
-        this.prevPageNum = 1;
-        this.nextPageNum = 2;
+    page: number;
+    constructor(private killListService: KillListService, private router: Router, private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit() {
-        this.killListService.getList(1).subscribe(items => this.items = items);
+        this.activatedRoute.params.subscribe((params: Params) => {
+            this.page = params['page'];
+            this.setPage(this.page);
+            this.killListService.getList(this.page).subscribe(items => this.items = items);
+        });
     }
 
-    prevPage(page: number) {
-        this.prevPageNum -= 1;
-        if (this.prevPageNum < 1) {
-            this.prevPageNum = 1;
-        }
-        this.nextPageNum -= 1;
-        if (this.nextPageNum < 2) {
+    private setPage(currentPage: number) {
+        if (currentPage && currentPage !== undefined && currentPage.toString() !== '') {
+            this.prevPageNum = currentPage - 1;
+            this.nextPageNum = parseInt(currentPage.toString()) + 1;
+            if (currentPage < 3) {
+                this.prevPageNum = null;
+            }
+        } else {
+            this.prevPageNum = null;
             this.nextPageNum = 2;
         }
-
-        this.killListService.getList(page).subscribe(items => this.items = items);
-    }
-
-    nextPage(page: number) {
-        this.prevPageNum += 1;
-        if (this.prevPageNum > 9) {
-            this.prevPageNum = 9;
-        }
-        this.nextPageNum += 1;
-        if (this.nextPageNum > 10) {
-            this.nextPageNum = 10;
-        }
-        this.killListService.getList(page).subscribe(items => this.items = items);
     }
 }

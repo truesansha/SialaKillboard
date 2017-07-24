@@ -1,8 +1,11 @@
 ﻿<div class="item-container">
     <div class="panel panel-default">
         <div class="panel-body">
-            <div (click)="prevPage(prevPageNum)" class="btn btn-primary btn-xs">&lt;----Туда</div>
-            <div (click)="nextPage(nextPageNum)" class="btn btn-primary btn-xs">Сюда----&gt;</div>
+            <ul class="pager">
+                <li class="previous"><a [routerLink]="['/home', prevPageNum || '']">&larr; Older</a></li>
+                {{page || 1}}
+                <li class="next"><a [routerLink]="['/home', nextPageNum || '']">Newer &rarr;</a></li>
+            </ul>
             <table class="table table-striped table-hover ">
                 <thead>
                 <tr>
@@ -15,16 +18,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let item of items" [ngClass]="(item.victimFactionId=='1')?'info':'danger'">
-                    <td>{{item.killTime | date:"dd.MM.yyyy HH:mm:ss"}}</td>
-                    <td>{{item.victimName}}</td>
-                    <td>{{item.victimClass}}</td>
-                    <td>{{item.killerName}}</td>
-                    <td>{{item.locationName}}</td>
-                    <td>{{item.victimFaction}}</td>
+                <tr [routerLink]="['/kill', item.killId]" *ngFor="let item of items" [ngClass]="(item.victimFactionId=='1')?'info':'danger'">
+                    <td><a [routerLink]="['/kill', item.killId]">{{item.killTime | date:"dd.MM.yyyy HH:mm:ss"}}</a></td>
+                    <td><a [routerLink]="['/player', item.victimId]">{{item.victimName}}</a></td>
+                    <td><a [routerLink]="['/class', item.victimClassId]">{{item.victimClass}}</a></td>
+                    <td><a [routerLink]="['/player', item.killerId]">{{item.killerName}}</a></td>
+                    <td><a [routerLink]="['/location', item.locationId]">{{item.locationName}}</a></td>
+                    <td><a [routerLink]="['/faction', item.victimFactionId]">{{item.victimFaction}}</a></td>
                 </tr>
                 </tbody>
             </table>
+            <ul class="pager">
+                <li class="previous"><a [routerLink]="['/home', prevPageNum || '']">&larr; Раньше</a></li>
+                {{page || 1}}
+                <li class="next"><a [routerLink]="['/home', nextPageNum || '']">Позже &rarr;</a></li>
+            </ul>
         </div>
     </div>
 </div>

@@ -2,21 +2,21 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { KillListItem } from './KillListItem';
+import { KillItem } from './KillItem';
 
 @Injectable()
-export class KillListService {
+export class KillService {
     constructor(private http: Http) { }
 
     private baseUrl = 'api/kills/'; // web api URL
     // calls the [GET] /api/kills/Get Web API method to retrieve kill list
-    getList(page: number) {
-        var url = this.baseUrl + 'list/';
-        if (page === null || page === undefined) {
-            page = 1;
+    getKill(id: number) {
+        var url = this.baseUrl;
+        if (id === null || id === undefined) {
+            id = 1;
         }
-        url += page;
+        url += id;
         return this.http.get(url)
-            .map(response => <KillListItem[]>response.json());
+            .map(response => <KillItem>response.json());
     }
 }

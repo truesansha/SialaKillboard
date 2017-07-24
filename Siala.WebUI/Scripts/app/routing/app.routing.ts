@@ -1,17 +1,47 @@
 ﻿import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from '../components/home/home.component';
+import { KillListComponent } from '../components/killList/kill-list.component';
+import { KillComponent } from '../components/kill/kill.component';
+import { PlayerComponent } from '../components/player/player.component';
+import { PlayerClassComponent } from '../components/playerClass/player-class.component';
+import { LocationComponent } from '../components/location/location.component';
+import { FactionComponent } from '../components/faction/faction.component';
 import { PageNotFoundComponent } from '../components/errors/page-not-found.component';
 
 const appRoutes: Routes = [
     {
-        path: '',
-        component: HomeComponent
+        path: 'home/:page',
+        component: KillListComponent
     },
     {
         path: 'home',
-        redirectTo: ''
+        component: KillListComponent
+    },
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
+    {
+        path: 'kill/:id',
+        component: KillComponent
+    },
+    {
+        path: 'player/:id',
+        component: PlayerComponent
+    },
+    {
+        path: 'class/:id',
+        component: PlayerClassComponent
+    },
+    {
+        path: 'location/:id',
+        component: LocationComponent
+    },
+    {
+        path: 'faction/:id',
+        component: FactionComponent
     },
     //{
     //    path: 'battles',
