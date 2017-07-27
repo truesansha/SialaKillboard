@@ -90,7 +90,6 @@ namespace Siala.Domain.Migrations
                     AttackerClass3Level = table.Column<int>(nullable: true),
                     AttackerFactionId = table.Column<int>(nullable: false),
                     AttackerId = table.Column<int>(nullable: false),
-                    AttackerRaceId = table.Column<int>(nullable: false),
                     DamageDone = table.Column<int>(nullable: false),
                     KillId = table.Column<int>(nullable: false)
                 },
@@ -116,8 +115,7 @@ namespace Siala.Domain.Migrations
                     VictimClass3Id = table.Column<int>(nullable: true),
                     VictimClass3Level = table.Column<int>(nullable: true),
                     VictimFactionId = table.Column<int>(nullable: false),
-                    VictimId = table.Column<int>(nullable: false),
-                    VictimRaceId = table.Column<int>(nullable: false)
+                    VictimId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

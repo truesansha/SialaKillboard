@@ -210,8 +210,6 @@ namespace Siala.Domain.Migrations
 
                     b.Property<int>("AttackerId");
 
-                    b.Property<int>("AttackerRaceId");
-
                     b.Property<int>("DamageDone");
 
                     b.Property<int>("KillId");
@@ -249,8 +247,6 @@ namespace Siala.Domain.Migrations
                     b.Property<int>("VictimFactionId");
 
                     b.Property<int>("VictimId");
-
-                    b.Property<int>("VictimRaceId");
 
                     b.HasKey("Id");
 

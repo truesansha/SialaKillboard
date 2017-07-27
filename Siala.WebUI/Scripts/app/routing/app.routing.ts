@@ -1,7 +1,7 @@
 ﻿import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { KillListComponent } from '../components/killList/kill-list.component';
+import { HomeComponent } from '../components/home/home.component';
 import { KillComponent } from '../components/kill/kill.component';
 import { PlayerComponent } from '../components/player/player.component';
 import { PlayerClassComponent } from '../components/playerClass/player-class.component';
@@ -12,11 +12,11 @@ import { PageNotFoundComponent } from '../components/errors/page-not-found.compo
 const appRoutes: Routes = [
     {
         path: 'home/:page',
-        component: KillListComponent
+        component: HomeComponent
     },
     {
         path: 'home',
-        component: KillListComponent
+        component: HomeComponent
     },
     {
         path: '',

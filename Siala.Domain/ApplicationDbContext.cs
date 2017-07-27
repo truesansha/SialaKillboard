@@ -45,7 +45,7 @@ namespace Siala.Domain
         public DbSet<InvolvedPlayer> InvolvedPlayers { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Kill> Kills { get; set; }
-        
+
         #endregion Properties
     }
 }

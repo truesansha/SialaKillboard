@@ -17,5 +17,7 @@ namespace Siala.Domain.Repository
         public IEnumerable<PlayerClass> PlayerClasses => _dbContext.PlayerClasses;
         public IEnumerable<Faction> Factions => _dbContext.Factions;
         public IEnumerable<Location> Locations => _dbContext.Locations;
+        public IEnumerable<PlayerRace> Races => _dbContext.PlayerRaces;
+        public IEnumerable<InvolvedPlayer> InvolvedPlayes => _dbContext.InvolvedPlayers;
     }
 }

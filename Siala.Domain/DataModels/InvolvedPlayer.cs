@@ -26,8 +26,6 @@ namespace Siala.Domain.DataModels
         [Required]
         public Int32 AttackerFactionId { get; set; }
         [Required]
-        public Int32 AttackerRaceId { get; set; }
-        [Required]
         public Int32 DamageDone { get; set; }
 
         #endregion Properties

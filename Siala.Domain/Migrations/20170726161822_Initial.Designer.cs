@@ -8,7 +8,7 @@ using Siala.Domain;
 namespace Siala.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170718185037_Initial")]
+    [Migration("20170726161822_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -211,8 +211,6 @@ namespace Siala.Domain.Migrations
 
                     b.Property<int>("AttackerId");
 
-                    b.Property<int>("AttackerRaceId");
-
                     b.Property<int>("DamageDone");
 
                     b.Property<int>("KillId");
@@ -250,8 +248,6 @@ namespace Siala.Domain.Migrations
                     b.Property<int>("VictimFactionId");
 
                     b.Property<int>("VictimId");
-
-                    b.Property<int>("VictimRaceId");
 
                     b.HasKey("Id");
 

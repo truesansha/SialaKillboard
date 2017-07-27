@@ -26,8 +26,6 @@ namespace Siala.Domain.DataModels
         [Required]
         public Int32 VictimFactionId { get; set; }
         [Required]
-        public Int32 VictimRaceId { get; set; }
-        [Required]
         public Int32 LocationId { get; set; }
         [Required]
         public Int32 DamageTaken { get; set; }

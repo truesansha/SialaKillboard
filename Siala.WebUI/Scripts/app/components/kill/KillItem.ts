@@ -1,12 +1,13 @@
-﻿export class KillItem {
+﻿import { PlayerItem } from '../player/PlayerItem';
+
+export class KillItem {
     constructor(
         public killId: number,
         public killTime: Date,
-        public victimName: string,
-        public victimClass: string,
-        public killerName: string,
+        public killerId: number,
+        public locationId: number,
         public locationName: string,
-        public victimFaction: string,
-        public victimFactionId: number
+        public victimDetails: PlayerItem,
+        public involvedPlayers: PlayerItem[]
     ) { }
 }

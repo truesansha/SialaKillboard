@@ -14,7 +14,7 @@ export class AppErrorHandler implements ErrorHandler {
         } else {
             errorText = error;
         }
-
+        console.error(errorText);
         this.errorSerice.raiseError(errorText);
     }
 }

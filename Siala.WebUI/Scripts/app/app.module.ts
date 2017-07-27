@@ -9,6 +9,7 @@ import 'rxjs/Rx';
 import { SnotifyModule, SnotifyService } from 'ng-snotify';
 
 import { AppComponent } from './components/app/app.component';
+import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/errors/page-not-found.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { KillListComponent } from './components/killList/kill-list.component';
@@ -18,8 +19,8 @@ import { PlayerClassComponent } from './components/playerClass/player-class.comp
 import { LocationComponent } from './components/location/location.component';
 import { FactionComponent } from './components/faction/faction.component';
 
+import { HomeService } from './components/home/home.service';
 import { SummaryService } from './components/summary/summary.service';
-import { KillListService } from './components/killList/kill-list.service';
 import { KillService } from './components/kill/kill.service';
 import { PlayerService } from './components/player/player.service';
 import { PlayerClassService } from './components/playerClass/player-class.service';
@@ -34,6 +35,7 @@ import { ErrorService } from './services/error.service';
     // directives, components, and pipes
     declarations: [
         AppComponent,
+        HomeComponent,
         SummaryComponent,
         KillListComponent,
         KillComponent,
@@ -56,8 +58,8 @@ import { ErrorService } from './services/error.service';
     ],
     // providers
     providers: [
+        HomeService,
         SummaryService,
-        KillListService,
         KillService,
         PlayerService,
         PlayerClassService,

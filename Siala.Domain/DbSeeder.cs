@@ -417,13 +417,12 @@ namespace Siala.Domain
                     EntityEntry<Kill> kill = _dbContext.Kills.Add(new Kill
                     {
                         FinalBlowPlayerId = fbPlayer.Id,
-                        KillTime = new DateTime(2017, rnd.Next(1, 7), rnd.Next(1, 29)),
+                        KillTime = new DateTime(2017, rnd.Next(1, 7), rnd.Next(1, 29), rnd.Next(0, 24), rnd.Next(0, 60), rnd.Next(0, 60)),
                         LocationId = rnd.Next(1, 4),
                         VictimClass1Id = player.Class1Id,
                         VictimClass1Level = player.Class1Level,
                         VictimFactionId = player.FactionId,
                         VictimId = player.Id,
-                        VictimRaceId = player.RaceId,
                         DamageTaken = 0
                     });
 
@@ -436,7 +435,6 @@ namespace Siala.Domain
                         AttackerClass1Id = fbPlayer.Class1Id,
                         AttackerClass1Level = 40,
                         AttackerFactionId = fbPlayer.FactionId,
-                        AttackerRaceId = fbPlayer.RaceId,
                         AttackerId = fbPlayer.Id,
                         DamageDone = rnd.Next(100, 1000),
                         KillId = kill.Entity.Id
@@ -454,7 +452,6 @@ namespace Siala.Domain
                                 AttackerClass1Id = randomAttacker.Class1Id,
                                 AttackerClass1Level = 40,
                                 AttackerFactionId = randomAttacker.FactionId,
-                                AttackerRaceId = randomAttacker.RaceId,
                                 AttackerId = randomAttacker.Id,
                                 DamageDone = rnd.Next(1, 200),
                                 KillId = kill.Entity.Id

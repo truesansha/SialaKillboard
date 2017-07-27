@@ -1,0 +1,17 @@
+﻿<div class="item-container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <ul class="pager">
+                <li class="previous"><a [routerLink]="['/home', prevPageNum || '']">&larr; Older</a></li>
+                {{page || 1}}
+                <li class="next"><a [routerLink]="['/home', nextPageNum || '']">Newer &rarr;</a></li>
+            </ul>
+            <kill-list [items]="items"></kill-list>
+            <ul class="pager">
+                <li class="previous"><a [routerLink]="['/home', prevPageNum || '']">&larr; Раньше</a></li>
+                {{page || 1}}
+                <li class="next"><a [routerLink]="['/home', nextPageNum || '']">Позже &rarr;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

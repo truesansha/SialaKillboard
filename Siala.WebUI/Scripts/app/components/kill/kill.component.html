@@ -1,3 +1,25 @@
-﻿<div class="item-container">
-KILL DETAILS
+﻿<div *ngIf="item" class="item-container">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Убийство</h3>
+        </div>
+        <div class="panel-body">
+            <p>Время: {{item.killTime | date:"dd.MM.yyyy HH:mm:ss"}}</p>
+            <p>Место: {{item.locationName}}</p>
+            <p>Жертва: {{item.victimDetails.name}}</p>
+            <p>Класс: {{item.victimDetails.class1}} ({{item.victimDetails.class1Level}})</p>
+            <p>Фракция: {{item.victimDetails.faction}}</p>
+            <p>Раса: {{item.victimDetails.race}}</p>
+        </div>
+        <div class="panel-body">
+            <div *ngFor="let killer of item.involvedPlayers">
+                <p>----</p>
+                <p>Имя: {{killer.name}}</p>
+                <p>Класс: {{killer.class1}} ({{killer.class1Level}})</p>
+                <p>Фракция: {{killer.faction}}</p>
+                <p>Раса: {{killer.race}}</p>
+                <p>Урон: {{killer.damage}} {{ killer.id === item.killerId ? '(Смертельный удар)' : ''}}</p>
+            </div>
+        </div>
+    </div>
 </div>

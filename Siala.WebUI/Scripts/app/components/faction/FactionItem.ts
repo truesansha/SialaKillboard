@@ -1,12 +1,9 @@
 ﻿export class FactionItem {
     constructor(
-        public killId: number,
-        public killTime: Date,
-        public victimName: string,
-        public victimClass: string,
-        public killerName: string,
-        public locationName: string,
-        public victimFaction: string,
-        public victimFactionId: number
+        public id: number,
+        public name: string,
+        public description: string,
+        public totalDeaths: number,
+        public totalKills: number
     ) { }
 }

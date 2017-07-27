@@ -2,10 +2,10 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { KillListItem } from './KillListItem';
+import { KillListItem } from '../killList/KillListItem';
 
 @Injectable()
-export class KillListService {
+export class HomeService {
     constructor(private http: Http) { }
 
     private baseUrl = 'api/kills/'; // web api URL

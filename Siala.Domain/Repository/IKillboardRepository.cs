@@ -6,9 +6,11 @@ namespace Siala.Domain.Repository
     public interface IKillboardRepository
     {
         IEnumerable<Kill> Kills { get; }
+        IEnumerable<InvolvedPlayer> InvolvedPlayes { get; }
         IEnumerable<Player> Players { get; }
         IEnumerable<PlayerClass> PlayerClasses { get; }
         IEnumerable<Faction> Factions { get; }
         IEnumerable<Location> Locations { get; }
+        IEnumerable<PlayerRace> Races { get; }
     }
 }

@@ -1,12 +1,9 @@
 ﻿export class LocationItem {
     constructor(
-        public killId: number,
-        public killTime: Date,
-        public victimName: string,
-        public victimClass: string,
-        public killerName: string,
-        public locationName: string,
-        public victimFaction: string,
-        public victimFactionId: number
+        public id: number,
+        public name: string,
+        public factionId: number,
+        public factionName: string,
+        public totalKills: number
     ) { }
 }
