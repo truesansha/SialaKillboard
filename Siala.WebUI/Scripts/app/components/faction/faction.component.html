@@ -1,20 +1,20 @@
-﻿<div class="panel panel-info">
-    <div class="panel-heading">
-        <h3 class="panel-title">Фракция</h3>
+﻿<div>
+    <div>
+        <h3>Фракция</h3>
     </div>
-    <div class="panel-body">
-        <p>Название: {{item ? item.name : ''}}</p>
-        <p>Описание: {{item ? item.description : ''}}</p>
-        <p>Всего убийств: {{item ? item.totalKills : ''}}</p>
-        <p>Всего смертей: {{item ? item.totalDeaths : ''}}</p>
+    <div *ngIf="item">
+        <p>Название: {{item.name}}</p>
+        <p>Описание: {{item.description}}</p>
+        <p>Всего убийств: {{item.totalKills'}}</p>
+        <p>Всего смертей: {{item.totalDeaths}}</p>
     </div>
 </div>
 
-<div class="item-container">
+<div>
     <p>Убийства</p>
     <kill-list [items]="killItems"></kill-list>
 </div>
-<div class="item-container">
+<div>
     <p>Смерти</p>
     <kill-list [items]="deathItems"></kill-list>
 </div>
