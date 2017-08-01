@@ -1,24 +1,27 @@
 ﻿<div *ngIf="item">
-    <div>
-        <div>
-            <h3>Убийство</h3>
+    <div class="ui-g">
+        <div class="ui-g-12">Жертва</div>
+        <div class="ui-g-4"><img src="./assets/sorcerer.jpg" alt="Smiley face" style="max-width: 70%; height: auto;"></div>
+        <div class="ui-g-8 ui-g-nopad">
+            <div class="ui-g-12">Время: {{item.killTime | date:"dd.MM.yyyy HH:mm:ss"}}</div>
+            <div class="ui-g-12">Место: {{item.locationName}}</div>
+            <div class="ui-g-12">Жертва: {{item.victimDetails.name}}</div>
+            <div class="ui-g-12">Класс: {{item.victimDetails.class1}} ({{item.victimDetails.class1Level}})</div>
+            <div class="ui-g-12">Фракция: {{item.victimDetails.faction}}</div>
+            <div class="ui-g-12">Раса: {{item.victimDetails.race}}</div>
         </div>
-        <div>
-            <p>Время: {{item.killTime | date:"dd.MM.yyyy HH:mm:ss"}}</p>
-            <p>Место: {{item.locationName}}</p>
-            <p>Жертва: {{item.victimDetails.name}}</p>
-            <p>Класс: {{item.victimDetails.class1}} ({{item.victimDetails.class1Level}})</p>
-            <p>Фракция: {{item.victimDetails.faction}}</p>
-            <p>Раса: {{item.victimDetails.race}}</p>
+    </div>
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <h3>Убийцы</h3>
         </div>
-        <div>
-            <div *ngFor="let killer of item.involvedPlayers">
-                <p>Имя: {{killer.name}}</p>
-                <p>Класс: {{killer.class1}} ({{killer.class1Level}})</p>
-                <p>Фракция: {{killer.faction}}</p>
-                <p>Раса: {{killer.race}}</p>
-                <p>Урон: {{killer.damage}} {{ killer.id === item.killerId ? '(Смертельный удар)' : ''}}</p>
-            </div>
+        <div class="ui-g-12" *ngFor="let killer of item.involvedPlayers">
+            <div class="ui-g-12">Имя: {{killer.name}}</div>
+            <div class="ui-g-12">Класс: {{killer.class1}} ({{killer.class1Level}})</div>
+            <div class="ui-g-12">Фракция: {{killer.faction}}</div>
+            <div class="ui-g-12">Раса: {{killer.race}}</div>
+            <div class="ui-g-12">Урон: {{killer.damage}} {{ killer.id === item.killerId ? '(Смертельный удар)' : ''}}</div>
+            <hr class="ui-widget-content" style="border-top: 0">
         </div>
     </div>
 </div>

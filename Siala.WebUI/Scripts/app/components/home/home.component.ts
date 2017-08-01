@@ -4,8 +4,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { KillListItem } from '../killList/KillListItem';
 import { HomeService } from './home.service';
 
-import './home.component.less';
-
 @Component({
     selector: 'home',
     templateUrl: 'home.component.html'

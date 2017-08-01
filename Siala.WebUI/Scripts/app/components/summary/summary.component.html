@@ -1,106 +1,31 @@
-﻿<div *ngIf="item">
-    <div>
-        <div>
-            <div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Class</th>
-                        <th>Kills</th>
-                        <th>Deaths</th>
-                        <th>Class</th>
-                        <th>Kills</th>
-                        <th>Deaths</th>
-                        <th>Class</th>
-                        <th>Kills</th>
-                        <th>Deaths</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Arcane Archer</td>
-                        <td>{{item.arcaneArcherKills}}</td>
-                        <td>{{item.arcaneArcherDeaths}}</td>
-                        <td>Druid</td>
-                        <td>{{item.druidKills}}</td>
-                        <td>{{item.druidDeaths}}</td>
-                        <td>Red Dragon Disciple</td>
-                        <td>{{item.rddKills}}</td>
-                        <td>{{item.rddDeaths}}</td>
-                    </tr>
-                    <tr>
-                        <td>Assassin</td>
-                        <td>{{item.assassinKills}}</td>
-                        <td>{{item.assassinDeaths}}</td>
-                        <td>Dwarven Defender</td>
-                        <td>{{item.ddKills}}</td>
-                        <td>{{item.ddDeaths}}</td>
-                        <td>Rogue</td>
-                        <td>{{item.rogueKills}}</td>
-                        <td>{{item.rogueDeaths}}</td>
-                    </tr>
-                    <tr>
-                        <td>Barbarian</td>
-                        <td>{{item.barbarianKills}}</td>
-                        <td>{{item.barbarianDeaths}}</td>
-                        <td>Fighter</td>
-                        <td>{{item.figherKills}}</td>
-                        <td>{{item.fighterDeaths}}</td>
-                        <td>Shadowdancer</td>
-                        <td>{{item.shadowdancerKills}}</td>
-                        <td>{{item.shadowdancerDeaths}}</td>
-                    </tr>
-                    <tr>
-                        <td>Bard</td>
-                        <td>{{item.bardKills}}</td>
-                        <td>{{item.bardDeaths}}</td>
-                        <td>Monk</td>
-                        <td>{{item.monkKills}}</td>
-                        <td>{{item.monkDeaths}}</td>
-                        <td>Shifter</td>
-                        <td>{{item.shifterKills}}</td>
-                        <td>{{item.shifterDeaths}}</td>
-                    </tr>
-                    <tr>
-                        <td>Blackguard</td>
-                        <td>{{item.blackguardKills}}</td>
-                        <td>{{item.blackguardDeaths}}</td>
-                        <td>Paladin</td>
-                        <td>{{item.paladinKills}}</td>
-                        <td>{{item.paladinDeaths}}</td>
-                        <td>Sorcerer</td>
-                        <td>{{item.sorcererKills}}</td>
-                        <td>{{item.sorcererDeaths}}</td>
-                    </tr>
-                    <tr>
-                        <td>Champion Of Torm</td>
-                        <td>{{item.cotKills}}</td>
-                        <td>{{item.cotDeaths}}</td>
-                        <td>Pale Master</td>
-                        <td>{{item.pmKills}}</td>
-                        <td>{{item.pmDeaths}}</td>
-                        <td>Weapon Master</td>
-                        <td>{{item.wmKills}}</td>
-                        <td>{{item.wmDeaths}}</td>
-                    </tr>
-                    <tr>
-                        <td>Cleric</td>
-                        <td>{{item.clericKills}}</td>
-                        <td>{{item.clericDeaths}}</td>
-                        <td>Ranger</td>
-                        <td>{{item.rangerKills}}</td>
-                        <td>{{item.rangerDeaths}}</td>
-                        <td>Wizard</td>
-                        <td>{{item.wizardKills}}</td>
-                        <td>{{item.wizardDeaths}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+﻿<div *ngIf="items">
+    <p-dataGrid [value]="items">
+        <p-header>
+            <div class="ui-g">
+                <div class="ui-g-4">
+                    <div class="ui-grid-col-4 left-text">Класс</div>
+                    <div class="ui-grid-col-4">Убийства</div>
+                    <div class="ui-grid-col-4">Смерти</div>
+                </div>
+                <div class="ui-g-4">
+                    <div class="ui-grid-col-4 left-text">Класс</div>
+                    <div class="ui-grid-col-4">Убийства</div>
+                    <div class="ui-grid-col-4">Смерти</div>
+                </div>
+                <div class="ui-g-4">
+                    <div class="ui-grid-col-4 left-text">Класс</div>
+                    <div class="ui-grid-col-4">Убийства</div>
+                    <div class="ui-grid-col-4">Смерти</div>
+                </div>
             </div>
-        </div>
-        <div>
-            <div>Валиостр</div>
-            <div>Рачье Герцогство</div>
-        </div>
-    </div>
+        </p-header>
+        <ng-template let-kill pTemplate="item">
+            <div class="ui-g-4">
+                <div class="ui-grid-col-4 left-text">{{kill.className}}</div>
+                <div class="ui-grid-col-4 center-text">{{kill.classKills}}</div>
+                <div class="ui-grid-col-4 center-text">{{kill.classDeaths}}</div>
+                <hr class="ui-widget-content" style="border-top: 0">
+            </div>
+        </ng-template>
+    </p-dataGrid>
 </div>

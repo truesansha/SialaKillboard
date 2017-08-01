@@ -6,9 +6,6 @@ import { FactionItem } from './FactionItem';
 import { FactionService } from './faction.service';
 import { KillListItem } from '../killList/KillListItem';
 
-import './faction.component.less';
-
-
 @Component({
     selector: 'faction',
     templateUrl: 'faction.component.html'

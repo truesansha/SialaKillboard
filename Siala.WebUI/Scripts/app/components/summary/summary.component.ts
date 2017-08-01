@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { SummaryItem } from './SummaryItem';
 import { SummaryService } from './summary.service';
 
-import './summary.component.less';
+import './summary.component.css'
 
 @Component({
     selector: 'summary',
@@ -12,12 +12,12 @@ import './summary.component.less';
 })
 
 export class SummaryComponent {
-    item: SummaryItem;
+    items: SummaryItem[];
     constructor(private summaryService: SummaryService,
         private router: Router) {
     }
 
     ngOnInit() {
-        this.summaryService.getSummary().subscribe(item => this.item = item);
+        this.summaryService.getSummary().subscribe(items => this.items = items);
     }
 }

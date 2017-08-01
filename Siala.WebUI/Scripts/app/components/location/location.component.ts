@@ -6,8 +6,6 @@ import { KillListItem } from '../killList/KillListItem';
 
 import { LocationService } from './location.service';
 
-import './location.component.less';
-
 @Component({
     selector: 'location',
     templateUrl: 'location.component.html'

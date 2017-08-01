@@ -6,9 +6,6 @@ import { PlayerService } from './player.service';
 import { PlayerItem } from './PlayerItem';
 import { KillListItem } from '../killList/KillListItem';
 
-
-import './player.component.less';
-
 @Component({
     selector: 'player',
     templateUrl: 'player.component.html'

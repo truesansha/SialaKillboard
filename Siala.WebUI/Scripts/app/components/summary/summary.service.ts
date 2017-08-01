@@ -13,7 +13,7 @@ export class SummaryService {
     getSummary() {
         var url = this.baseUrl;
         return this.http.get(url)
-            .map(response => <SummaryItem>response.json());
+            .map(response => <SummaryItem[]>response.json());
     }
 
     private handleError(error: Response) {

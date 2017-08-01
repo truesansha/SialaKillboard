@@ -1,22 +1,40 @@
-﻿<table>
-    <thead>
-        <tr>
-            <th>Время</th>
-            <th>Жертва</th>
-            <th>Класс</th>
-            <th>Убийца</th>
-            <th>Место</th>
-            <th>Фракция</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of items">
-            <td><a [routerLink]="['/kill', item.killId]">{{item.killTime | date:"dd.MM.yyyy HH:mm:ss"}}</a></td>
-            <td><a [routerLink]="['/player', item.victimId]">{{item.victimName}}</a></td>
-            <td><a [routerLink]="['/class', item.victimClassId]">{{item.victimClass}}</a></td>
-            <td><a [routerLink]="['/player', item.killerId]">{{item.killerName}}</a></td>
-            <td><a [routerLink]="['/location', item.locationId]">{{item.locationName}}</a></td>
-            <td><a [routerLink]="['/faction', item.victimFactionId]">{{item.victimFaction}}</a></td>
-        </tr>
-    </tbody>
-</table>
+﻿<div *ngIf="items">
+    <p-dataGrid [value]="items">
+        <p-header>
+            <div class="ui-g">
+                <div class="ui-g-1 left-text">
+                    Время
+                </div>
+                <div class="ui-g-4 left-text">
+                    Жертва
+                </div>
+                <div class="ui-g-4 left-text">
+                    Убийца
+                </div>
+                <div class="ui-g-3 left-text">
+                    Место
+                </div>
+            </div>
+        </p-header>
+        <ng-template let-kill pTemplate="item">
+            <div class="ui-g-12 killitem" [class.redkill]="kill.victimFactionId===2" [class.bluekill]="kill.victimFactionId===1">
+                <div class="ui-g-1">
+                    <div class="ui-grid-col-12 left-text"><a [routerLink]="['/kill', kill.killId]">{{kill.killTime | date:"dd.MM.yyyy"}}</a></div>
+                    <div class="ui-grid-col-12 left-text"><a [routerLink]="['/kill', kill.killId]">{{kill.killTime | date:"HH:mm:ss"}}</a></div>
+                </div>
+                <div class="ui-g-4">
+                    <div class="ui-grid-col-12 left-text"><a [routerLink]="['/player', kill.victimId]">{{kill.victimName}}</a> (<a [routerLink]="['/class', kill.victimClassId]">{{kill.victimClass}}</a>)</div>
+                    <div class="ui-grid-col-12 left-text"><a [routerLink]="['/faction', kill.victimFactionId]">{{kill.victimFaction}}</a></div>
+                </div>
+                <div class="ui-g-4">
+                    <div class="ui-grid-col-12 left-text"><a [routerLink]="['/player', kill.killerId]">{{kill.killerName}}</a> (<a [routerLink]="['/class', kill.killerClassId]">{{kill.killerClass}}</a>)</div>
+                    <div class="ui-grid-col-12 left-text"><a [routerLink]="['/faction', kill.killerFactionId]">{{kill.killerFaction}}</a></div>
+                </div>
+                <div class="ui-g-3">
+                    <div class="ui-grid-col-12 left-text"><a [routerLink]="['/location', kill.locationId]">{{kill.locationName}}</a></div>
+                    <div class="ui-grid-col-12 left-text"><a [routerLink]="['/faction', kill.locationFactionId]">{{kill.locationFaction}}</a></div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataGrid>
+</div>

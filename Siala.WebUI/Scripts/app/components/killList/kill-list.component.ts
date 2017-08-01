@@ -1,9 +1,8 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import './kill-list.component.css'
 import { KillListItem } from './KillListItem';
-
-import './kill-list.component.less';
 
 @Component({
     selector: 'kill-list',

@@ -7,6 +7,7 @@
     "@angular/animations": "4.2.5",
     "@angular/common": "4.2.5",
     "@angular/compiler": "4.2.5",
+    "@angular/compiler-cli": "4.2.5",
     "@angular/core": "4.2.5",
     "@angular/forms": "4.2.5",
     "@angular/http": "4.2.5",
@@ -14,15 +15,18 @@
     "@angular/platform-browser-dynamic": "4.2.5",
     "@angular/router": "4.2.5",
     "@angular/upgrade": "4.2.5",
-    "ng-snotify": "2.0.3",
     "core-js": "2.4.1",
+    "font-awesome": "4.7.0",
     "ie-shim": "0.1.0",
+    "ng-snotify": "2.0.3",
+    "primeng": "4.1.2",
     "rxjs": "5.4.2",
     "zone.js": "0.8.12"
   },
 
   "devDependencies": {
     "@types/node": "7.0.22",
+    "@ngtools/webpack": "1.5.3",
     "angular2-template-loader": "0.6.2",
     "angular-router-loader": "0.6.0",
     "awesome-typescript-loader": "3.2.1",
@@ -48,7 +52,7 @@
   "scripts": {
     "start": "concurrently \"webpack-dev-server --hot --inline --port 40990\" \"dotnet watch run\" ",
     "build-dev": "npm run webpack-dev",
-    "build-production": "npm run ngc && npm run webpack-production",
+    "build-production": "npm run webpack-production",
     "publish-for-iis": "npm run build-production && dotnet publish -c Release",
     "watch-webpack-dev": "set NODE_ENV=development && webpack --watch --color",
     "watch-webpack-production": "npm run build-production --watch --color",

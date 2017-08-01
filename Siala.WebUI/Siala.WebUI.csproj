@@ -27,6 +27,9 @@
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\assets\sorcerer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Siala.Domain\Siala.Domain.csproj" />
   </ItemGroup>
 

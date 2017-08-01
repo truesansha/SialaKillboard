@@ -1,27 +1,13 @@
-﻿<nav>
-    <ul>
-        <li [class.active]="isActive([''])">
-            <a class="home" [routerLink]="['']">Home</a>
-        </li>
-        <li [class.active]="isActive(['battles'])">
-            <a class="battles" [routerLink]="['battles']">Battles</a>
-        </li>
-        <li [class.active]="isActive(['stats'])">
-            <a class="stats" [routerLink]="['stats']">Stats</a>
-        </li>
-        <li [class.active]="isActive(['search'])">
-            <a class="search" [routerLink]="['search']">Search</a>
-        </li>
-        <li [class.active]="isActive(['forum'])">
-            <a class="forum" href="http://siala.kiev.ua/index.php?">Forum</a>
-        </li>
-        <li [class.active]="isActive(['maps'])">
-            <a class="maps" [routerLink]="['maps']">Maps</a>
-        </li>
-    </ul>
-</nav>
-<div>
-    <summary></summary>
-    <router-outlet></router-outlet>
+﻿<div class="main-container">
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <br>
+        </div>
+    </div>
+    <p-menubar [model]="items"></p-menubar>
+    <div class="content-container">
+        <summary></summary>
+        <router-outlet></router-outlet>
+    </div>
+    <ng-snotify></ng-snotify>
 </div>
-<ng-snotify></ng-snotify>

@@ -1,0 +1,19 @@
+﻿.killitem {
+    margin: 1px 5px 1px 5px;
+}
+
+.redkill {
+    background: #832224;
+}
+
+    .redkill:hover {
+        background: red;
+    }
+
+.bluekill {
+    background: #173168;
+}
+
+    .bluekill:hover {
+        background: blue;
+    }

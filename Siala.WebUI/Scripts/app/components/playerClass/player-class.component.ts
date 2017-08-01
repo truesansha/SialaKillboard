@@ -6,8 +6,6 @@ import { KillListItem } from '../killList/KillListItem';
 
 import { PlayerClassService } from './player-class.service';
 
-import './player-class.component.less';
-
 @Component({
     selector: 'player-class',
     templateUrl: 'player-class.component.html'

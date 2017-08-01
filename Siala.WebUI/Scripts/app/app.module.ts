@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MenubarModule, DataGridModule } from 'primeng/primeng';
 import 'rxjs/Rx';
 
 import { SnotifyModule, SnotifyService } from 'ng-snotify';
@@ -54,7 +55,9 @@ import { ErrorService } from './services/error.service';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        SnotifyModule
+        SnotifyModule,
+        MenubarModule,
+        DataGridModule
     ],
     // providers
     providers: [

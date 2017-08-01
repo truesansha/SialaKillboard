@@ -4,8 +4,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { KillItem } from './KillItem';
 import { KillService } from './kill.service';
 
-import './kill.component.less';
-
 @Component({
     selector: 'kill',
     templateUrl: 'kill.component.html'

@@ -95,11 +95,15 @@ module.exports = {
             filename: 'index.html',
             inject: 'body',
             template: 'Scripts/app/index.html'
-        })
+        }),
 
         //new CopyWebpackPlugin([
         //    { from: './web.config', to: './', flatten: true }
         //])
+
+        new CopyWebpackPlugin([
+            { from: './Scripts/assets/img/*.*', to: './assets/', flatten: true }
+        ])
     ]
 
 };

@@ -32,21 +32,32 @@ namespace Siala.WebUI.Controllers
                                               join vf in Repository.Factions on k.VictimFactionId equals vf.Id
                                               join kl in Repository.Players on k.FinalBlowPlayerId equals kl.Id
                                               join l in Repository.Locations on k.LocationId equals l.Id
+                                              join lf in Repository.Factions on l.FactionId equals lf.Id
+                                              join fb in Repository.InvolvedPlayes on k.Id equals fb.KillId
+                                              join fbc in Repository.PlayerClasses on fb.AttackerClass1Id equals fbc.Id
+                                              join fbf in Repository.Factions on fb.AttackerFactionId equals fbf.Id
+                                              where fb.AttackerId == k.FinalBlowPlayerId
                                               orderby k.KillTime descending
                                               select new KillItem
                                               {
                                                   KillTime = k.KillTime,
-                                                  VictimFactionId = (byte)vf.Id,
                                                   KillId = k.Id,
+                                                  VictimFactionId = (byte)vf.Id,
                                                   VictimFaction = vf.Name,
-                                                  KillerName = kl.Name,
-                                                  KillerId = kl.Id,
-                                                  LocationName = l.Name,
-                                                  LocationId = l.Id,
+                                                  VictimClassId = k.VictimClass1Id,
+                                                  VictimId = v.Id,
                                                   VictimClass = vc.Name,
                                                   VictimName = v.Name,
-                                                  VictimId = v.Id,
-                                                  VictimClassId = k.VictimClass1Id
+                                                  KillerFactionId = fb.AttackerFactionId,
+                                                  KillerFaction = fbf.Name,
+                                                  KillerClassId = fb.AttackerClass1Id,
+                                                  KillerClass = fbc.Name,
+                                                  KillerId = kl.Id,
+                                                  KillerName = kl.Name,
+                                                  LocationName = l.Name,
+                                                  LocationId = l.Id,
+                                                  LocationFactionId = l.FactionId,
+                                                  LocationFaction = lf.Name
                                               }).Skip((page - 1) * DefaultPageSize).Take(DefaultPageSize);
 
             return killList.ToList();

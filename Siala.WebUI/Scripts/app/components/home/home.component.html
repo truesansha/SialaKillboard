@@ -1,17 +1,23 @@
-﻿<div>
-    <div>
-        <div>
-            <ul>
-                <li><a [routerLink]="['/home', prevPageNum || '']">&larr; Older</a></li>
-                {{page || 1}}
-                <li><a [routerLink]="['/home', nextPageNum || '']">Newer &rarr;</a></li>
-            </ul>
-            <kill-list [items]="items"></kill-list>
-            <ul>
-                <li><a [routerLink]="['/home', prevPageNum || '']">&larr; Раньше</a></li>
-                {{page || 1}}
-                <li><a [routerLink]="['/home', nextPageNum || '']">Позже &rarr;</a></li>
-            </ul>
-        </div>
+﻿<div class="ui-g">
+    <div class="ui-g-4">
+        <a [routerLink]="['/home', prevPageNum || '']">&larr; Туда</a>
+    </div>
+    <div class="ui-g-4 center-text">
+        {{page || 1}}
+    </div>
+    <div class="ui-g-4 right-text">
+        <a [routerLink]="['/home', nextPageNum || '']">Сюда &rarr;</a>
+    </div>
+</div>
+<kill-list [items]="items"></kill-list>
+<div class="ui-g">
+    <div class="ui-g-4">
+        <a [routerLink]="['/home', prevPageNum || '']">&larr; Туда</a>
+    </div>
+    <div class="ui-g-4 center-text">
+        {{page || 1}}
+    </div>
+    <div class="ui-g-4 right-text">
+        <a [routerLink]="['/home', nextPageNum || '']">Сюда &rarr;</a>
     </div>
 </div>
