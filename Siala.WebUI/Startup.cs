@@ -51,7 +51,7 @@ namespace Siala.WebUI
             // Add ApplicationDbContext.
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
             // Add ApplicationDbContext's DbSeeder
-            services.AddSingleton<DbSeeder>();
+            services.AddScoped<DbSeeder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

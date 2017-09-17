@@ -100,40 +100,66 @@ namespace Siala.Domain
 
         private async Task CreateFactionsAndLocationsAsync()
         {
-            _dbContext.Factions.Add(new Faction
+            using (var transaction = _dbContext.Database.BeginTransaction())
             {
-                Name = "Нейтральный",
-                Description = "Нейтральные земли."
-            });
+                _dbContext.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Factions] ON");
 
-            _dbContext.Factions.Add(new Faction
-            {
-                Name = "Рачье Герцогство",
-                Description = "Владения Неназываемого."
-            });
+                _dbContext.Factions.Add(new Faction
+                {
+                    Id = 1,
+                    Name = "Нейтральный",
+                    Description = "Нейтральные земли."
+                });
 
-            _dbContext.Factions.Add(new Faction
-            {
-                Name = "Валиостр",
-                Description = "Владения короля Сталкона."
-            });
+                _dbContext.Factions.Add(new Faction
+                {
+                    Id = 2,
+                    Name = "Валиостр",
+                    Description = "Владения короля Сталкона."
+                });
+
+                _dbContext.Factions.Add(new Faction
+                {
+                    Id = 3,
+                    Name = "Рачье Герцогство",
+                    Description = "Владения Неназываемого."
+                });
+
+                _dbContext.Factions.Add(new Faction
+                {
+                    Id = 4,
+                    Name = "Империя",
+                    Description = "Приозерная и Заозерная Империя."
+                });
+
+                _dbContext.SaveChanges();
+
+                _dbContext.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Factions] OFF");
+
+                transaction.Commit();
+            }
 
             List<Location> locations = new List<Location>
             {
                 new Location
                 {
                     Name = "Золотой лес",
-                    FactionId = 3
-                },
-                new Location
-                {
-                    Name = "Инсанна",
-                    FactionId = 2
+                    FactionId = 1
                 },
                 new Location
                 {
                     Name = "Авендум",
-                    FactionId = 1
+                    FactionId = 2
+                },
+                new Location
+                {
+                    Name = "Инсанна",
+                    FactionId = 3
+                },
+                new Location
+                {
+                    Name = "Приозерная империя. Асгот.",
+                    FactionId = 4
                 }
 
             };
@@ -389,23 +415,26 @@ namespace Siala.Domain
 
             List<Player> players = new List<Player>();
 
-            players.AddRange(getDwarfs(dwarfNames));
-            players.AddRange(getElfs(elfNames));
-            players.AddRange(getGnomes(gnomeNames));
-            players.AddRange(getHalfElfes(halfelfNames));
-            players.AddRange(getHalfOrcs(halforcNames));
-            players.AddRange(getHalflings(halflingNames));
-            players.AddRange(getHumans(humanNames));
+            players.AddRange(GetDwarfs(dwarfNames));
+            players.AddRange(GetElfs(elfNames));
+            players.AddRange(GetGnomes(gnomeNames));
+            players.AddRange(GetHalfElfes(halfelfNames));
+            players.AddRange(GetHalfOrcs(halforcNames));
+            players.AddRange(GetHalflings(halflingNames));
+            players.AddRange(GetHumans(humanNames));
 
             await _dbContext.Players.AddRangeAsync(players);
         }
 
         private async Task GenerateTempKills()
         {
-            List<Player> playersValiostr = await _dbContext.Players.Where(p => p.FactionId == 1).ToListAsync();
+            List<Player> playersValiostr = await _dbContext.Players.Where(p => p.FactionId == 2).ToListAsync();
             Int32 vCount = playersValiostr.Count;
-            List<Player> playersInsanna = await _dbContext.Players.Where(p => p.FactionId == 2).ToListAsync();
+            List<Player> playersInsanna = await _dbContext.Players.Where(p => p.FactionId == 3).ToListAsync();
             Int32 iCount = playersInsanna.Count;
+            List<Player> playersEmpire = await _dbContext.Players.Where(p => p.FactionId == 4).ToListAsync();
+            Int32 eCount = playersEmpire.Count;
+
             List<Player> players = await _dbContext.Players.ToListAsync();
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             foreach (Player player in players)
@@ -413,7 +442,9 @@ namespace Siala.Domain
                 Int32 killNumber = rnd.Next(1, 25);
                 for (Int32 i = 0; i < killNumber; i++)
                 {
-                    Player fbPlayer = player.FactionId == 1 ? playersInsanna[rnd.Next(0, iCount)] : playersValiostr[rnd.Next(0, vCount)];
+                    Int32 attackerFaction = GetAttackerFaction(player.FactionId);
+                    Player fbPlayer = attackerFaction == 2 ? playersValiostr[rnd.Next(0, vCount)] : attackerFaction == 3 ? playersInsanna[rnd.Next(0, iCount)] : playersEmpire[rnd.Next(0, eCount)];
+
                     EntityEntry<Kill> kill = _dbContext.Kills.Add(new Kill
                     {
                         FinalBlowPlayerId = fbPlayer.Id,
@@ -444,7 +475,8 @@ namespace Siala.Domain
                     involvedIds.Add(fbPlayer.Id);
                     for (Int32 j = 0; j < involvedCount; j++)
                     {
-                        Player randomAttacker = player.FactionId == 1 ? playersInsanna[rnd.Next(0, iCount)] : playersValiostr[rnd.Next(0, vCount)];
+                        attackerFaction = GetAttackerFaction(player.FactionId);
+                        Player randomAttacker = attackerFaction == 2 ? playersValiostr[rnd.Next(0, vCount)] : attackerFaction == 3 ? playersInsanna[rnd.Next(0, iCount)] : playersEmpire[rnd.Next(0, eCount)];
                         if (!involvedIds.Contains(randomAttacker.Id))
                         {
                             _dbContext.InvolvedPlayers.Add(new InvolvedPlayer
@@ -456,14 +488,15 @@ namespace Siala.Domain
                                 DamageDone = rnd.Next(1, 200),
                                 KillId = kill.Entity.Id
                             });
+                            involvedIds.Add(randomAttacker.Id);
                         }
                     }
                 }
-                
+
             }
         }
 
-        private List<Player> getDwarfs(List<String> names)
+        private List<Player> GetDwarfs(List<String> names)
         {
             List<Player> result = new List<Player>();
 
@@ -472,7 +505,8 @@ namespace Siala.Domain
                 Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
                 Int32 classId = rnd.Next(1, 23);
-                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+                Int32 factionRandom = rnd.Next(1, 100) % 3;
+                Int32 factionId = factionRandom == 0 ? 2 : factionRandom == 1 ? 3 : 4;
 
                 result.Add(new Player
                 {
@@ -487,7 +521,7 @@ namespace Siala.Domain
             return result;
         }
 
-        private List<Player> getElfs(List<String> names)
+        private List<Player> GetElfs(List<String> names)
         {
             List<Player> result = new List<Player>();
 
@@ -496,7 +530,8 @@ namespace Siala.Domain
                 Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
                 Int32 classId = rnd.Next(1, 23);
-                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+                Int32 factionRandom = rnd.Next(1, 100) % 3;
+                Int32 factionId = factionRandom == 0 ? 2 : factionRandom == 1 ? 3 : 4;
 
                 result.Add(new Player
                 {
@@ -511,7 +546,7 @@ namespace Siala.Domain
             return result;
         }
 
-        private List<Player> getGnomes(List<String> names)
+        private List<Player> GetGnomes(List<String> names)
         {
             List<Player> result = new List<Player>();
 
@@ -520,7 +555,8 @@ namespace Siala.Domain
                 Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
                 Int32 classId = rnd.Next(1, 23);
-                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+                Int32 factionRandom = rnd.Next(1, 100) % 3;
+                Int32 factionId = factionRandom == 0 ? 2 : factionRandom == 1 ? 3 : 4;
 
                 result.Add(new Player
                 {
@@ -535,7 +571,7 @@ namespace Siala.Domain
             return result;
         }
 
-        private List<Player> getHalfElfes(List<String> names)
+        private List<Player> GetHalfElfes(List<String> names)
         {
             List<Player> result = new List<Player>();
 
@@ -544,7 +580,8 @@ namespace Siala.Domain
                 Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
                 Int32 classId = rnd.Next(1, 23);
-                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+                Int32 factionRandom = rnd.Next(1, 100) % 3;
+                Int32 factionId = factionRandom == 0 ? 2 : factionRandom == 1 ? 3 : 4;
 
                 result.Add(new Player
                 {
@@ -559,7 +596,7 @@ namespace Siala.Domain
             return result;
         }
 
-        private List<Player> getHalfOrcs(List<String> names)
+        private List<Player> GetHalfOrcs(List<String> names)
         {
             List<Player> result = new List<Player>();
 
@@ -568,7 +605,8 @@ namespace Siala.Domain
                 Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
                 Int32 classId = rnd.Next(1, 23);
-                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+                Int32 factionRandom = rnd.Next(1, 100) % 3;
+                Int32 factionId = factionRandom == 0 ? 2 : factionRandom == 1 ? 3 : 4;
 
                 result.Add(new Player
                 {
@@ -583,7 +621,7 @@ namespace Siala.Domain
             return result;
         }
 
-        private List<Player> getHalflings(List<String> names)
+        private List<Player> GetHalflings(List<String> names)
         {
             List<Player> result = new List<Player>();
 
@@ -592,7 +630,8 @@ namespace Siala.Domain
                 Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
                 Int32 classId = rnd.Next(1, 23);
-                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+                Int32 factionRandom = rnd.Next(1, 100) % 3;
+                Int32 factionId = factionRandom == 0 ? 2 : factionRandom == 1 ? 3 : 4;
 
                 result.Add(new Player
                 {
@@ -607,7 +646,7 @@ namespace Siala.Domain
             return result;
         }
 
-        private List<Player> getHumans(List<String> names)
+        private List<Player> GetHumans(List<String> names)
         {
             List<Player> result = new List<Player>();
 
@@ -616,7 +655,8 @@ namespace Siala.Domain
                 Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
                 Int32 classId = rnd.Next(1, 23);
-                Int32 factionId = rnd.Next(1, 100) % 2 == 0 ? 1 : 2;
+                Int32 factionRandom = rnd.Next(1, 100) % 3;
+                Int32 factionId = factionRandom == 0 ? 2 : factionRandom == 1 ? 3 : 4;
 
                 result.Add(new Player
                 {
@@ -629,6 +669,26 @@ namespace Siala.Domain
             }
 
             return result;
+        }
+
+        private Int32 GetAttackerFaction(Int32 victimFaction)
+        {
+            Int32 attackerFaction = 0;
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+            switch (victimFaction)
+            {
+                case 2:
+                    attackerFaction = rnd.Next(1, 100) % 2 == 0 ? 3 : 4;
+                    break;
+                case 3:
+                    attackerFaction = rnd.Next(1, 100) % 2 == 0 ? 2 : 4;
+                    break;
+                case 4:
+                    attackerFaction = rnd.Next(1, 100) % 2 == 0 ? 2 : 3;
+                    break;
+            }
+
+            return attackerFaction;
         }
     }
 }

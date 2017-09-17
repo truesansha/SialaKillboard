@@ -17,3 +17,11 @@
     .bluekill:hover {
         background: blue;
     }
+
+.yellowKill {
+    background: #AA8E39;
+}
+
+    .yellowKill:hover {
+        background: #D0A31E;
+    }

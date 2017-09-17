@@ -1,4 +1,4 @@
-﻿import '../favicon.ico';
+﻿// import '../favicon.ico';
 // Angular
 import '@angular/platform-browser';
 import '@angular/platform-browser-dynamic';

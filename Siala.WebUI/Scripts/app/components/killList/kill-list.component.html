@@ -17,7 +17,7 @@
             </div>
         </p-header>
         <ng-template let-kill pTemplate="item">
-            <div class="ui-g-12 killitem" [class.redkill]="kill.victimFactionId===2" [class.bluekill]="kill.victimFactionId===1">
+            <div class="ui-g-12 killitem" [class.bluekill]="kill.victimFactionId===2" [class.redkill]="kill.victimFactionId===3" [class.yellowKill]="kill.victimFactionId===4">
                 <div class="ui-g-1">
                     <div class="ui-grid-col-12 left-text"><a [routerLink]="['/kill', kill.killId]">{{kill.killTime | date:"dd.MM.yyyy"}}</a></div>
                     <div class="ui-grid-col-12 left-text"><a [routerLink]="['/kill', kill.killId]">{{kill.killTime | date:"HH:mm:ss"}}</a></div>
